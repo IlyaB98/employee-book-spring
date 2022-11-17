@@ -35,16 +35,25 @@ public class EmployeeService {
                 .sum();
     }
 
-    public OptionalInt getMinSalaryByEmployees() {
-        return employees.values().stream()
+    public Collection<Employee> getMinSalaryByEmployees() {
+        int minSalary = employees.values().stream()
                 .mapToInt(Employee::getSalary)
-                .min();
+                .min().getAsInt();
+
+        return employees.values().stream()
+                .filter(e -> e.getSalary() == minSalary)
+                .toList();
     }
 
-    public OptionalInt getMaxSalaryByEmployees() {
-        return employees.values().stream()
+    public Collection<Employee> getMaxSalaryByEmployees() {
+        int maxSalary = employees.values().stream()
                 .mapToInt(Employee::getSalary)
-                .max();
+                .max()
+                .orElse(0);
+
+        return employees.values().stream()
+                .filter(e -> e.getSalary() == maxSalary)
+                .toList();
     }
 
     public Collection<Employee> getAllEmployeesSalaryMoreAverage() {
