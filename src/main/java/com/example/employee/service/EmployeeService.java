@@ -9,7 +9,7 @@ import java.util.*;
 import static java.util.Comparator.comparingInt;
 
 @Service
-public class EmployeeService implements Comparable<Employee> {
+public class EmployeeService{
 
     private final Map<Integer, Employee> employees = new HashMap<>();
 
@@ -69,10 +69,5 @@ public class EmployeeService implements Comparable<Employee> {
         return employees.values().stream()
                 .filter(e -> e.getSalary() < averageSalary)
                 .toList();
-    }
-
-    @Override
-    public int compareTo(Employee o) {
-        return 0;
     }
 }
