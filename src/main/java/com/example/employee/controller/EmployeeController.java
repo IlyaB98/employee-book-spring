@@ -2,6 +2,7 @@ package com.example.employee.controller;
 
 import com.example.employee.model.Employee;
 import com.example.employee.record.EmployeeRequest;
+import com.example.employee.service.EmployeeNotFoundException;
 import com.example.employee.service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,13 +37,13 @@ public class EmployeeController {
     }
 
     @GetMapping("employees/salary/min")
-    public Collection<Employee> getMinSalaryByEmployees() {
+    public Employee getMinSalaryByEmployees() throws EmployeeNotFoundException {
         return this.employeeService.getMinSalaryByEmployees();
 
     }
 
     @GetMapping("employees/salary/max")
-    public Collection<Employee> getMaxSalaryByEmployees() {
+    public Employee getMaxSalaryByEmployees() throws EmployeeNotFoundException {
         return this.employeeService.getMaxSalaryByEmployees();
     }
 

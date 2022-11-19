@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+import static java.util.Comparator.comparingInt;
+
 @Service
-public class EmployeeService {
+public class EmployeeService implements Comparable<Employee> {
 
     private final Map<Integer, Employee> employees = new HashMap<>();
 
@@ -35,25 +37,16 @@ public class EmployeeService {
                 .sum();
     }
 
-    public Collection<Employee> getMinSalaryByEmployees() {
-        int minSalary = employees.values().stream()
-                .mapToInt(Employee::getSalary)
-                .min().getAsInt();
-
+    public Employee getMinSalaryByEmployees() throws EmployeeNotFoundException {
         return employees.values().stream()
-                .filter(e -> e.getSalary() == minSalary)
-                .toList();
+                .min(comparingInt(Employee::getSalary))
+                .orElseThrow(EmployeeNotFoundException::new);
     }
 
-    public Collection<Employee> getMaxSalaryByEmployees() {
-        int maxSalary = employees.values().stream()
-                .mapToInt(Employee::getSalary)
-                .max()
-                .orElse(0);
-
+    public Employee getMaxSalaryByEmployees() throws EmployeeNotFoundException {
         return employees.values().stream()
-                .filter(e -> e.getSalary() == maxSalary)
-                .toList();
+                .max(comparingInt(Employee::getSalary))
+                .orElseThrow(EmployeeNotFoundException::new);
     }
 
     public Collection<Employee> getAllEmployeesSalaryMoreAverage() {
@@ -76,5 +69,10 @@ public class EmployeeService {
         return employees.values().stream()
                 .filter(e -> e.getSalary() < averageSalary)
                 .toList();
+    }
+
+    @Override
+    public int compareTo(Employee o) {
+        return 0;
     }
 }
