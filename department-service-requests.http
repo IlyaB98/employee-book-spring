@@ -1,0 +1,14 @@
+###Получить список сотрудников по департаменту
+GET http://localhost:8080/department/1/employees
+
+###Получить сумму зарплат по департаменту
+GET http://localhost:8080/department/1/salary/sum
+
+###Получить максимальную зарплату по департаменту
+GET http://localhost:8080/department/1/salary/max
+
+###Получить минимальную зарплату по департаменту
+GET http://localhost:8080/department/1/salary/min
+
+###Получить сотрудников сгруппированых по отделам
+GET http://localhost:8080/department/employees
