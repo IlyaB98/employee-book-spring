@@ -19,7 +19,7 @@ Content-Type: application/json
 {
   "firstName": "Test1",
   "lastName": "Test1",
-  "department": 1,
+  "department": 2,
   "salary": 2000
 }
 ### Создать сотрудника 3
@@ -29,7 +29,7 @@ Content-Type: application/json
 {
   "firstName": "Test1",
   "lastName": "Test1",
-  "department": 1,
+  "department": 3,
   "salary": 3000
 }
 

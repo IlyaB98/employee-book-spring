@@ -4,6 +4,7 @@ import com.example.employee.model.Employee;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class DepartmentService {
@@ -56,19 +57,9 @@ public class DepartmentService {
                 .orElse(0);
     }
 
-    public Map<Integer, Collection<Employee>> groupedEmployeesByDepartment() {
-        List<Integer> integerList = employeeService.getAllEmployees().stream()
-                .mapToInt(Employee::getDepartment)
-                .boxed()
-                .toList();
-        Set<Integer> departmentSet = new HashSet<>(integerList);
-        Iterator<Integer> iterator = departmentSet.iterator();
-        if (iterator.hasNext()) {
-            Map<Integer, Collection<Employee>> employeesMap = new HashMap<>();
-            employeesMap.put(iterator.next(), listEmployeeByDepartment(iterator.next()));
-            return employeesMap;
-        } else {
-            return null;
-        }
+    public Map<Integer, List<Employee>> groupedEmployeesByDepartment() {
+        Map<Integer, List<Employee>> collectionMap = employeeService.getEmployees().values().stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment));
+        return collectionMap;
     }
 }

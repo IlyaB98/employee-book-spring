@@ -40,7 +40,7 @@ public class DepartmentController {
     }
 
     @GetMapping("/department/employees")
-    public Map<Integer, Collection<Employee>> getGroupedEmployeesByDepartment() {
+    public Map<Integer, List<Employee>> getGroupedEmployeesByDepartment() {
         return departmentService.groupedEmployeesByDepartment();
     }
 }
